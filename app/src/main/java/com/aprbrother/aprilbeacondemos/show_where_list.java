@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aprbrother.aprilbeacondemo.R;
+import com.aprilbrother.aprilbrothersdk.Region;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,12 +36,12 @@ public class show_where_list extends Activity{ // 근방의 미아 최근 이동
     private TextView five;
     private int major;
     String mJsonString;
+    public Region region1 = new Region("충북대","B5B182C7-EAB1-4988-AA99-B5C1517008D9", 22, 22); // FDFB
 
-        //public BeaconList beaconList;
 
-        protected void onCreate(Bundle savedInstanceState) {
+
+    protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            //beaconList=(BeaconList)getApplicationContext();
             Intent intent = getIntent();
             Data data = (Data)intent.getSerializableExtra("data");
             major=data.major;
@@ -56,6 +57,7 @@ public class show_where_list extends Activity{ // 근방의 미아 최근 이동
 
 
     }
+
     private class GetData extends AsyncTask<String, Void, String>{
         ProgressDialog progressDialog;
         String errorString = null;
@@ -164,13 +166,11 @@ public class show_where_list extends Activity{ // 근방의 미아 최근 이동
                 when4=item.getString("when4");
                 when5=item.getString("when5");
             }
-            one.setText(where1+when1);
-            two.setText(where2+when2);
-            three.setText(where3+when3);
-            four.setText(where4+when4);
-            five.setText(where5+when5);
-
-
+            one.setText(where1);
+            two.setText(where2);
+            three.setText(where3);
+            four.setText(where4);
+            five.setText(where5);
 
         } catch (JSONException e) {
             Log.d("phptest_MainActivity", "showResult : ", e);

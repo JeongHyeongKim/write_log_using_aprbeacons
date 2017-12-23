@@ -22,7 +22,7 @@
                 android:id="@+id/tv_bluetooth_list_item_fragment_name"
                 style="@style/tv_beacon_list_item_fragment"
                 android:tag="name"
-                android:text="AprilBeacon_123456" />
+                android:text="Beacon1" />
 
             <TextView
                 android:id="@+id/tv_bluetooth_list_item_fragment_mac"

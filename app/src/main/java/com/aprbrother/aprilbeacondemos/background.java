@@ -61,11 +61,7 @@ public class background extends Application {
         beaconList=(BeaconList)getApplicationContext();
         user_info=(insert_user_information)getApplicationContext();
         region1=beaconList.region1;
-        region2=beaconList.region2;
-        region3=beaconList.region3;
-        region4=beaconList.region4;
-        region5=beaconList.region5;
-        region6=beaconList.region6;
+
         user_name=user_info.User_Name;
         user_location=user_info.User_Location;
         user_phone=user_info.User_Number; // 이거를 userinfomation  class에서 폰번 받아오기 매서드로 교체한 다음에 불러오는 식으로 합시다!
@@ -75,11 +71,7 @@ public class background extends Application {
             public void onServiceReady(){
                 try {
                     beaconManager.startMonitoring(region1);
-                    beaconManager.startMonitoring(region2);
-                    beaconManager.startMonitoring(region3);
-                    beaconManager.startMonitoring(region4);
-                    beaconManager.startMonitoring(region5);
-                    beaconManager.startMonitoring(region6);
+
                     beaconManager.setBackgroundScanPeriod(5000, 100000); // 5초 스캔, 100초 쉼
                 } catch (RemoteException e) {
                     e.printStackTrace();
@@ -93,7 +85,7 @@ public class background extends Application {
      private void init(){
          long now = System.currentTimeMillis();
          Date date = new Date(now);
-         SimpleDateFormat sdf = new SimpleDateFormat("yyyymmdd");
+         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
          final String getTime = sdf.format(date); // 현재 날짜 가져오기
 
          beaconManager.setMonitoringListener(new BeaconManager.MonitoringListener() { // 거리는 정확하지 않아서 제외
@@ -106,72 +98,13 @@ public class background extends Application {
                              data1 = "Number"+list.get(i).getMajor()+" Beacon was near "+user_name+"("+user_phone+")"+" at"+getTime;
                              try {
                                  PHPRequest request = new PHPRequest("http://beaconplus.co.kr/insert.php?");
-                                 String result=request.PhPtest(String.valueOf(data1),String.valueOf(list.get(i).getMajor()));
+                                 String result=request.PhPtest(String.valueOf(data1),list.get(i).getMajor());
                              } catch (MalformedURLException e) {
                                  e.printStackTrace();
                              }
                          }
                      }
-                     if (region.getIdentifier().equals(region2.getIdentifier())) {
-                         if (region.getMajor()==list.get(i).getMajor()) {
-                             data2 = "Number"+list.get(i).getMajor()+" Beacon was near "+user_name+" at"+getTime;
-                             try {
-                                 PHPRequest request = new PHPRequest("http://beaconplus.co.kr/insert.php?");
-                                 String result=request.PhPtest(String.valueOf(data2),String.valueOf(list.get(i).getMajor()));
-                             } catch (MalformedURLException e) {
-                                 e.printStackTrace();
-                             }
-                         }
 
-                     }
-                     if (region.getIdentifier().equals(region3.getIdentifier())) {
-                         if (region.getMajor()==list.get(i).getMajor()) {
-                             data3 = "Number"+list.get(i).getMajor()+" Beacon was near "+user_name+"("+user_phone+")"+" at"+getTime;
-                             try {
-                                 PHPRequest request = new PHPRequest("http://beaconplus.co.kr/insert.php?");
-                                 String result=request.PhPtest(String.valueOf(data3),String.valueOf(list.get(i).getMajor()));
-                             } catch (MalformedURLException e) {
-                                 e.printStackTrace();
-                             }
-                         }
-
-                     }
-                     if (region.getIdentifier().equals(region4.getIdentifier())) {
-                         if (region.getMajor()==list.get(i).getMajor()) {
-                             data4 = "Number"+list.get(i).getMajor()+" Beacon was near "+user_name+"("+user_phone+")"+" at"+getTime;
-                             try {
-                                 PHPRequest request = new PHPRequest("http://beaconplus.co.kr/insert.php?");
-                                 String result=request.PhPtest(String.valueOf(data4),String.valueOf(list.get(i).getMajor()));
-                             } catch (MalformedURLException e) {
-                                 e.printStackTrace();
-                             }
-                         }
-
-                     }
-                     if (region.getIdentifier().equals(region5.getIdentifier())) {
-                         if (region.getMajor()==list.get(i).getMajor()) {
-                             data5 = "Number"+list.get(i).getMajor()+" Beacon was near "+user_name+"("+user_phone+")"+" at"+getTime;
-                             try {
-                                 PHPRequest request = new PHPRequest("http://beaconplus.co.kr/insert.php?");
-                                 String result=request.PhPtest(String.valueOf(data5),String.valueOf(list.get(i).getMajor()));
-                             } catch (MalformedURLException e) {
-                                 e.printStackTrace();
-                             }
-                         }
-
-                     }
-                     if (region.getIdentifier().equals(region6.getIdentifier())) {
-                         if (region.getMajor()==list.get(i).getMajor()) {
-                             data6 = "Number"+list.get(i).getMajor()+" Beacon was near "+user_name+"("+user_phone+")"+" at"+getTime;
-                             try {
-                                 PHPRequest request = new PHPRequest("http://beaconplus.co.kr/insert.php?");
-                                 String result=request.PhPtest(String.valueOf(data6),String.valueOf(list.get(i).getMajor()));
-                             } catch (MalformedURLException e) {
-                                 e.printStackTrace();
-                             }
-                         }
-
-                     }
 
                  }
              }
@@ -206,17 +139,17 @@ public class background extends Application {
             return jsonHtml.toString();
         }
 
-        public String PhPtest(final String where, final String name) { // sql의 where은 문장으로 몇번비콘이 어떤사람 근처(폰번)에 몇시몇분에 있었다의 형식을 띌 예정
+        public String PhPtest(final String where, final int name) { // sql의 where은 문장으로 몇번비콘이 어떤사람 근처(폰번)에 몇시몇분에 있었다의 형식을 띌 예정
             long now = System.currentTimeMillis();
             Date date = new Date(now);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyymmddHHmmss"); //날짜를 정수형으로 받아서 비교연산 후 php에서 차례대로 값이 들어가고 다차있을 시 가장 작은 값
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss"); //날짜를 정수형으로 받아서 비교연산 후 php에서 차례대로 값이 들어가고 다차있을 시 가장 작은 값
             //에서부터 갱신 되도록 설정할거임
             final String getTime = sdf.format(date); // 현재 날짜 가져오기
             try {
                 String postData = "where=" + where+"&"+"name="+name+"&"+"when="+getTime;
                 HttpURLConnection conn = (HttpURLConnection)url.openConnection();
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                conn.setRequestMethod("POST");
+                conn.setRequestMethod("GET");
                 conn.setConnectTimeout(5000);
                 conn.setDoOutput(true);
                 conn.setDoInput(true);

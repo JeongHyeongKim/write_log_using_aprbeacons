@@ -30,12 +30,8 @@ import java.util.List;
 public class BeaconList extends Activity {
     private static final int REQUEST_ENABLE_BT = 1234;
     private static final String TAG = "BeaconList";
-    public Region region1 = new Region("Missing1","B5B182C7-EAB1-4988-AA99-B5C1517008D9", 1, 2); // FE07
-    public Region region2 = new Region("Missing2", "B5B182C7-EAB1-4988-AA99-B5C1517008D9", 3, 4); //FF19
-    public Region region3 = new Region("Missing3", "B5B182C7-EAB1-4988-AA99-B5C1517008D9", 5, 6); //FE87
-    public Region region4 = new Region("Missing4", "B5B182C7-EAB1-4988-AA99-B5C1517008D9", 7, 8); //FF0F
-    public Region region5 = new Region("Missing5", "B5B182C7-EAB1-4988-AA99-B5C1517008D9", 9, 10); //FE88
-    public Region region6 = new Region("Missing6", "B5B182C7-EAB1-4988-AA99-B5C1517008D9", 11, 12); //FD78 , 비콘리스트 추가 요망
+    public Region region1 = new Region("Missing1","B5B182C7-EAB1-4988-AA99-B5C1517008D9", 22, 22); // FE07
+
 
 
     private BeaconAdapter adapter;
@@ -74,7 +70,7 @@ public class BeaconList extends Activity {
                 for (Beacon beacon : beacons) {
 
                     if(beacon.getMajor()<101){
-                        if(beacon.getMajor()==1){
+                        if(beacon.getMajor()==22){
                             if(flag[0]>0){
                                 for(int i=0;i<myBeacons.size();i++){
                                     if(myBeacons.get(i).getMajor()==beacon.getMajor()){
@@ -89,90 +85,7 @@ public class BeaconList extends Activity {
                                 Log.i(TAG, "Info" + myBeacons.size());
                             }
                         }
-                        if(beacon.getMajor()==2){
-                            if(flag[1]>0){
-                                for(int i=0;i<myBeacons.size();i++){
-                                    if(myBeacons.get(i).getMajor()==beacon.getMajor()){
-                                        myBeacons.set(i, beacon);
-                                    }
-                                }
-                            }else{
-                                myBeacons.add(beacon);
-                                flag[1]++;
-                                Log.i(TAG, "add!" + beacon.getMajor());
-                                Log.i(TAG, "Info" + myBeacons.size());
-                            }
-                        }
-                        if(beacon.getMajor()==3){
-                            if(flag[2]>0){
-                                for(int i=0;i<myBeacons.size();i++){
-                                    if(myBeacons.get(i).getMajor()==beacon.getMajor()){
-                                        myBeacons.set(i, beacon);
-                                    }
-                                }
-                            }else{
-                                myBeacons.add(beacon);
-                                flag[2]++;
-                                Log.i(TAG, "add!" + beacon.getMajor());
-                                Log.i(TAG, "Info" + myBeacons.size());
-                            }
-                        }
-                        if(beacon.getMajor()==4){
-                            if(flag[3]>0){
-                                for(int i=0;i<myBeacons.size();i++){
-                                    if(myBeacons.get(i).getMajor()==beacon.getMajor()){
-                                        myBeacons.set(i, beacon);
-                                    }
-                                }
-                            }else{
-                                myBeacons.add(beacon);
-                                flag[3]++;
-                                Log.i(TAG, "add!" + beacon.getMajor());
-                                Log.i(TAG, "Info" + myBeacons.size());
-                            }
-                        }
-                        if(beacon.getMajor()==5){
-                            if(flag[4]>0){
-                                for(int i=0;i<myBeacons.size();i++){
-                                    if(myBeacons.get(i).getMajor()==beacon.getMajor()){
-                                        myBeacons.set(i, beacon);
-                                    }
-                                }
-                            }else{
-                                myBeacons.add(beacon);
-                                flag[4]++;
-                                Log.i(TAG, "add!" + beacon.getMajor());
-                                Log.i(TAG, "Info" + myBeacons.size());
-                            }
-                        }
-                        if(beacon.getMajor()==6){
-                            if(flag[5]>0){
-                                for(int i=0;i<myBeacons.size();i++){
-                                    if(myBeacons.get(i).getMajor()==beacon.getMajor()){
-                                        myBeacons.set(i, beacon);
-                                    }
-                                }
-                            }else{
-                                myBeacons.add(beacon);
-                                flag[5]++;
-                                Log.i(TAG, "add!" + beacon.getMajor());
-                                Log.i(TAG, "Info" + myBeacons.size());
-                            }
-                        }
-                        if(beacon.getMajor()==7){
-                            if(flag[6]>0){
-                                for(int i=0;i<myBeacons.size();i++){
-                                    if(myBeacons.get(i).getMajor()==beacon.getMajor()){
-                                        myBeacons.set(i, beacon);
-                                    }
-                                }
-                            }else{
-                                myBeacons.add(beacon);
-                                flag[6]++;
-                                Log.i(TAG, "add!" + beacon.getMajor());
-                                Log.i(TAG, "Info" + myBeacons.size());
-                            }
-                        }
+
 
 
                     }
@@ -217,11 +130,6 @@ public class BeaconList extends Activity {
                     try {
                         tv.setText("停止扫描");
                         beaconManager.startRanging(region1);
-                        beaconManager.startRanging(region2);
-                        beaconManager.startRanging(region3);
-                        beaconManager.startRanging(region4);
-                        beaconManager.startRanging(region5);
-                        beaconManager.startRanging(region6);
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
@@ -229,11 +137,7 @@ public class BeaconList extends Activity {
                     try {
                         tv.setText("开启扫描");
                         beaconManager.stopRanging(region1);
-                        beaconManager.stopRanging(region2);
-                        beaconManager.stopRanging(region3);
-                        beaconManager.stopRanging(region4);
-                        beaconManager.stopRanging(region5);
-                        beaconManager.stopRanging(region6);
+
                     } catch (RemoteException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -258,11 +162,6 @@ public class BeaconList extends Activity {
                 try {
                     Log.i(TAG, "connectToService");
                     beaconManager.startRanging(region1);
-                    beaconManager.startRanging(region2);
-                    beaconManager.startRanging(region3);
-                    beaconManager.startRanging(region4);
-                    beaconManager.startRanging(region5);
-                    beaconManager.startRanging(region6);
 
                 } catch (RemoteException e) {
                     e.printStackTrace();
@@ -317,11 +216,7 @@ public class BeaconList extends Activity {
         try {
             myBeacons.clear();
             beaconManager.stopRanging(region1);
-            beaconManager.stopRanging(region2);
-            beaconManager.stopRanging(region3);
-            beaconManager.stopRanging(region4);
-            beaconManager.stopRanging(region5);
-            beaconManager.stopRanging(region6);
+
             beaconManager.disconnect();
         } catch (RemoteException e) {
             Log.d(TAG, "Error while stopping ranging", e);

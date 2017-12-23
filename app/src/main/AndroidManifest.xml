@@ -6,11 +6,8 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-feature
         android:name="android.hardware.bluetooth_le"
@@ -36,11 +33,11 @@
         <activity android:name="com.aprbrother.aprilbeacondemos.ModifyActivity" />
         <activity android:name="com.aprbrother.aprilbeacondemos.RequestActivity" />
         <activity android:name="com.aprbrother.aprilbeacondemos.ResultActivity" />
-        <activity android:name="com.aprbrother.aprilbeacondemos.SensorActivity" />
         <activity android:name="com.aprbrother.aprilbeacondemos.EddyStoneScanActivity" />
         <activity android:name="com.aprbrother.aprilbeacondemos.EddyStoneModifyActivity" />
         <activity android:name="com.aprbrother.aprilbeacondemos.insert_user_information" />
         <activity android:name="com.aprbrother.aprilbeacondemos.show_where_list" />
+        <activity android:name="com.aprbrother.aprilbeacondemos.Search_data"/>
 
         <receiver android:name="com.aprbrother.aprilbeacondemos.MyServiceReceiver">
             <intent-filter>
@@ -50,12 +47,6 @@
 
         <service
             android:name="com.aprilbrother.aprilbrothersdk.service.BeaconService"
-            android:exported="false" />
-        <service
-            android:name="com.aprilbrother.aprilbrothersdk.services.ABeaconUartService"
-            android:exported="false" />
-        <service
-            android:name="com.aprilbrother.aprilbrothersdk.services.UartService"
             android:exported="false" />
         <service
             android:name="com.aprbrother.aprilbeacondemos.NotifyService"
