@@ -30,7 +30,8 @@ import java.util.List;
 public class BeaconList extends Activity {
     private static final int REQUEST_ENABLE_BT = 1234;
     private static final String TAG = "BeaconList";
-    public Region region1 = new Region("Missing1","B5B182C7-EAB1-4988-AA99-B5C1517008D9", 22, 22); // FE07
+    public Region region1 = new Region("ROOT","B5B182C7-EAB1-4988-AA99-B5C1517008D9", 22, 22); // FE07
+    public Region region2 = new Region("a", "B5B182C7-EAB1-4988-AA99-B5C1517008D9",1, 1 );
 
 
 
@@ -121,40 +122,14 @@ public class BeaconList extends Activity {
             }
         });
 
-        final TextView tv = (TextView) findViewById(R.id.tv_swith);
-        tv.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                if (tv.getText().equals("开启扫描")) {
-                    try {
-                        tv.setText("停止扫描");
-                        beaconManager.startRanging(region1);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    try {
-                        tv.setText("开启扫描");
-                        beaconManager.stopRanging(region1);
-
-                    } catch (RemoteException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
 
 
     }
 
-    /**
-     * 连接服务 开始搜索beacon connect service start scan beacons
-     */
+
     private void connectToService() {
         Log.i(TAG, "connectToService");
-//        getActionBar().setSubtitle("Scanning...");
         adapter.replaceWith(Collections.<Beacon>emptyList());
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
@@ -226,6 +201,11 @@ public class BeaconList extends Activity {
 
     public void scanner_is_clicked(View v){
         Intent intent = new Intent(BeaconList.this, insert_user_information.class);
+        startActivity(intent);
+    }
+
+    public void Search_clicked(View v){
+        Intent intent = new Intent(BeaconList.this, Search_data.class);
         startActivity(intent);
     }
 

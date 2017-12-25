@@ -7,9 +7,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.aprbrother.aprilbeacondemo.R;
+import com.aprilbrother.aprilbrothersdk.Region;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,13 +35,24 @@ public class Search_data extends Activity{
     private TextView three;
     private TextView four;
     private TextView five;
+    private EditText who;
     String mJsonString;
+    static String buffer;
+    public Region region1 = new Region("ROOT","B5B182C7-EAB1-4988-AA99-B5C1517008D9", 22, 22); // FE07
+    public Region region2 = new Region("a", "B5B182C7-EAB1-4988-AA99-B5C1517008D9", 1, 1);
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_data);
+
+        who = (EditText)findViewById(R.id.who);
+        one = (TextView)findViewById(R.id.one);
+        two = (TextView)findViewById(R.id.two);
+        three = (TextView)findViewById(R.id.three);
+        four = (TextView)findViewById(R.id.four);
+        five = (TextView)findViewById(R.id.five);
 
     }
 
@@ -153,16 +167,27 @@ public class Search_data extends Activity{
             five.setText(where5);
 
         } catch (JSONException e) {
-            Log.d("phptest_MainActivity", "showResult : ", e);
+            Log.d("", "showResult : ", e);
             e.printStackTrace();
         }
 
     }
-    public void search_clicked(){
+    public void Search_clicked(View v){
+        buffer=who.getText().toString();
+        GetData task = new GetData();
+
+            if (buffer == region1.getIdentifier().toString()) {
+                task.execute("http://beaconplus.co.kr/load_data.php?major="+region1.getMajor());
+            }
+            if(buffer==region2.getIdentifier().toString()){
+                task.execute("http://beaconplus.co.kr/load_data.php?major="+region2.getMajor());
+            }
+
 
 
     }
-    public void back_clicked(){
+    public void back_clicked(View v){
         Intent intent = new Intent(Search_data.this, BeaconList.class);
+        startActivity(intent);
     }
 }
