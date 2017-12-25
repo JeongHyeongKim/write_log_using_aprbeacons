@@ -64,7 +64,7 @@ public class background extends Application {
 
         user_name=user_info.User_Name;
         user_location=user_info.User_Location;
-        user_phone=user_info.User_Number; // 이거를 userinfomation  class에서 폰번 받아오기 매서드로 교체한 다음에 불러오는 식으로 합시다!
+        //user_phone=user_info.User_Number; // 이거를 userinfomation  class에서 폰번 받아오기 매서드로 교체한 다음에 불러오는 식으로 합시다!
 
         beaconManager=new BeaconManager(getApplicationContext());
         beaconManager.connect(new BeaconManager.ServiceReadyCallback(){

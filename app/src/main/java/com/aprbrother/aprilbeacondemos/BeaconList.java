@@ -30,7 +30,7 @@ import java.util.List;
 public class BeaconList extends Activity {
     private static final int REQUEST_ENABLE_BT = 1234;
     private static final String TAG = "BeaconList";
-    public Region region1 = new Region("ROOT","B5B182C7-EAB1-4988-AA99-B5C1517008D9", 22, 22); // FE07
+    public Region region1 = new Region("Chicken","B5B182C7-EAB1-4988-AA99-B5C1517008D9", 22, 22); // FE07
     public Region region2 = new Region("a", "B5B182C7-EAB1-4988-AA99-B5C1517008D9",1, 1 );
 
 
@@ -110,14 +110,6 @@ public class BeaconList extends Activity {
                 Data data = new Data(send_major);
                 Intent intent = new Intent(BeaconList.this, show_where_list.class);
                 intent.putExtra("data", data);
-                /*if (beacon.getName().contains("ABSensor")) {
-                    intent = new Intent(BeaconList.this, SensorActivity.class);
-                } else {
-                    intent = new Intent(BeaconList.this, ModifyActivity.class);
-                }
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("beacon", beacon);
-                intent.putExtras(bundle);*/
                 startActivity(intent);
             }
         });
@@ -163,20 +155,6 @@ public class BeaconList extends Activity {
     protected void onStart() {
         super.onStart();
         Log.i(TAG, "onStart");
-        // if (!beaconManager.hasBluetooth()) {
-        // Toast.makeText(this, "Device does not have Bluetooth Low Energy",
-        // Toast.LENGTH_LONG).show();
-        // Log.i(TAG, "!hasBluetooth");
-        // return;
-        // }
-        // if (!beaconManager.isBluetoothEnabled()) {
-        // Log.i(TAG, "!isBluetoothEnabled");
-        // Intent enableBtIntent = new Intent(
-        // BluetoothAdapter.ACTION_REQUEST_ENABLE);
-        // startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        // } else {
-        // connectToService();
-        // }
         connectToService();
     }
 

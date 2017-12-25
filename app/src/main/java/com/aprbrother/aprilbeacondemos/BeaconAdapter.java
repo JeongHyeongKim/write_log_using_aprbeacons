@@ -53,27 +53,23 @@ public class BeaconAdapter extends BaseAdapter {
 
 	private void bind(Beacon beacon, View view) { // 여기서 해당 비콘의 트랙 정보를 보여준다. 바꿔보자
 		ViewHolder holder = (ViewHolder) view.getTag();
-		holder.macTextView.setText("MAC : " + beacon.getMacAddress() + "("
-				+ beacon.getDistance() + "m)");
-		holder.uuidTextView.setText("UUID: " + beacon.getProximityUUID());
+		holder.macTextView.setText("Approximate Distance : "+
+				+ beacon.getDistance() + "m");
 		holder.majorTextView.setText("Major: " + beacon.getMajor());
-//		holder.minorTextView.setText("Minor: " + beacon.getMinor());
-		holder.measuredPowerTextView.setText("MPower: "
-				+ beacon.getMeasuredPower());
-		holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
+
 
 		switch (beacon.getProximity()) {
 		case 0:
-			holder.proximityView.setText("proximity: " + "unknow");
+			holder.proximityView.setText("nickname: " + "Chicken");
 			break;
 		case 1:
-			holder.proximityView.setText("proximity: " + "immediate");
+			holder.proximityView.setText("nickname: " + "Chicken");
 			break;
 		case 2:
-			holder.proximityView.setText("proximity: " + "near");
+			holder.proximityView.setText("nickname: " + "Chicken");
 			break;
 		case 3:
-			holder.proximityView.setText("proximity: " + "far");
+			holder.proximityView.setText("nickname: " + "Chicken");
 			break;
 		default:
 			break;
