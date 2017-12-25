@@ -37,7 +37,6 @@ public class Search_data extends Activity{
     private TextView five;
     private EditText who;
     String mJsonString;
-    static String buffer;
     public Region region1 = new Region("ROOT","B5B182C7-EAB1-4988-AA99-B5C1517008D9", 22, 22); // FE07
     public Region region2 = new Region("a", "B5B182C7-EAB1-4988-AA99-B5C1517008D9", 1, 1);
 
@@ -75,7 +74,7 @@ public class Search_data extends Activity{
 
             progressDialog.dismiss();
             one.setText(result);
-            Log.d("phptest_MainActivity", "response  - " + result);
+            Log.d("Search_data_php", "response  - " + result);
 
             if (result == null){
 
@@ -107,7 +106,7 @@ public class Search_data extends Activity{
 
 
                 int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d("phptest_MainActivity", "response code - " + responseStatusCode);
+                Log.d("Search_data_php", "response code - " + responseStatusCode);
 
                 InputStream inputStream;
                 if(responseStatusCode == HttpURLConnection.HTTP_OK) {
@@ -137,7 +136,7 @@ public class Search_data extends Activity{
 
             } catch (Exception e) {
 
-                Log.d("phptest_MainActivity", "InsertData: Error ", e);
+                Log.d("Search_data_php", "InsertData: Error ", e);
                 errorString = e.toString();
 
                 return null;
@@ -172,20 +171,28 @@ public class Search_data extends Activity{
         }
 
     }
+
     public void Search_clicked(View v){
-        buffer=who.getText().toString();
+        Log.i("Search_button", "Do");
+        String buffer=who.getText().toString();
+        Log.i("Search_button", buffer);
         GetData task = new GetData();
+        Log.i("Search_button", region1.getIdentifier());
+        Log.i("Search_button", region2.getIdentifier());
+        Log.i("Search_button", String.valueOf(buffer==region2.getIdentifier()));
+        Log.i("Search_button", String.valueOf(buffer=="a"));
+        Log.i("Search_button", String.valueOf(region2.getIdentifier()=="a"));
 
-            if (buffer == region1.getIdentifier().toString()) {
+            if(buffer==region1.getIdentifier().toString()) {
                 task.execute("http://beaconplus.co.kr/load_data.php?major="+region1.getMajor());
+                Log.i("Search_button", "Do1");
             }
-            if(buffer==region2.getIdentifier().toString()){
+            if("a"=="a"){
                 task.execute("http://beaconplus.co.kr/load_data.php?major="+region2.getMajor());
+                Log.i("Search_button", "Do2");
             }
-
-
-
     }
+
     public void back_clicked(View v){
         Intent intent = new Intent(Search_data.this, BeaconList.class);
         startActivity(intent);
